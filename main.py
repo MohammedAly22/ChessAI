@@ -1,4 +1,4 @@
-# importing pygame, fonts, sounds and chess engine
+# importing pygame, fonts, sounds, chess engine and AI player modules
 import pygame as p
 import ChessEngine, AiPlayer
 import pygame.mixer
