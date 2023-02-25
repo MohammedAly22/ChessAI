@@ -5,9 +5,9 @@ https://www.javatpoint.com/ai-alpha-beta-pruning
 
 ### Modules:
 ChessAI consists of 3 modules:
-1- Main module
-2- ChessEngine module
-3- AIPlayer module
+1. Main module
+2. ChessEngine module
+3. AIPlayer module
 
 ### Main module:
 The `main` module reponsible for creating the user-interface of the game board in addition to animation, sounds, and the actual game loop. It uses the `ChessEngine` module and `AIPlayer` module.
