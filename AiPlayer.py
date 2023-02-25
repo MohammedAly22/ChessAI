@@ -8,15 +8,16 @@ max_depth = 4
 def getRandomMove(validMoves):
     return validMoves[random.randint(0, len(validMoves) - 1)]
 
-# function to find the best move of the minimax algorithm
+
 def findBestMove(gs, validmoves):
     global nextMove
     nextMove = None
     random.shuffle(validmoves)
     findMoveAlphaBeta(gs, validmoves, max_depth, -checkMate, checkMate, 1 if gs.whiteToMove else -1)
+    
     return nextMove  # this will return the next move after changing it in minimax move function
 
-# function that has minimax algorithm implementation
+
 def findMoveMinMax(gs, validmoves, depth, whiteToMove):
     global nextMove
     # terminal state of recursion, if we reached to depth 0 then get score of this move
@@ -26,30 +27,30 @@ def findMoveMinMax(gs, validmoves, depth, whiteToMove):
     if whiteToMove:
         maxScore = -checkMate  # starting with really low score to be able to change it
         for move in validmoves:
-            gs.makeMove(move)  # make each valid move
+            gs.makeMove(move)
             nextMoves = gs.getValidMoves()  # generate all possible moves depending in this move
-            score = findMoveMinMax(gs, nextMoves, depth - 1, False)  # recursion but now, depth -1, False
-            if score > maxScore:  # check if the score is greater than max score then make it max score
+            score = findMoveMinMax(gs, nextMoves, depth - 1, False)
+            if score > maxScore:
                 maxScore = score
                 if depth == max_depth:  # if we explored the whole state space
-                    nextMove = move  # then this move is next move
+                    nextMove = move 
             gs.undoMove()  # make sure to undo it
-        return maxScore  # return max score
+        return maxScore
     # this is the AI player's turn then we want to minimizing score
     else:
         minScore = checkMate  # starting min score with very high value
         for move in validmoves:
-            gs.makeMove(move)  # make each valid move
+            gs.makeMove(move)
             nextMoves = gs.getValidMoves()  # generate all valid moves depends on this move
-            score = findMoveMinMax(gs, nextMoves, depth - 1, True)  # recursion
-            if score < minScore:  # check if the score os lower than min score, then make min score = score
+            score = findMoveMinMax(gs, nextMoves, depth - 1, True)
+            if score < minScore:
                 minScore = score
                 if depth == max_depth:  # if we explored the whole state space
-                    nextMove = move  # then our next move is the current move
+                    nextMove = move
             gs.undoMove()  # make sure to undo this move
-        return minScore  # return min score
+        return minScore
 
-# function that has minimax algorithm with alpha-beta pruning
+
 def findMoveMinMaxAlphaBeta(gs, validmoves, depth, alpha, beta, whiteToMove):
     global nextMove
     # terminal state of recursion, if we reached to depth 0 then get score of this move
@@ -157,4 +158,3 @@ def getScore(board):
             elif square[0] == 'b':  # if the black's turn this is minimizing score
                 score -= pieceScores[square[1]]
     return score
-
